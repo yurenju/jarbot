@@ -4,8 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit --coverage --verbose",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
   },
   "author": "Yuren Ju <yurenju@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^2.8.7",
+    "@types/micro": "^7.3.1",
+    "@types/node": "^10.1.2",
+    "dotenv": "^5.0.1",
+    "jest": "^23.0.0",
+    "test-listen": "^1.1.0",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  },
+  "dependencies": {
+    "form-data": "^2.3.2",
+    "micro": "^9.3.1",
+    "node-fetch": "^2.1.2"
+  }
 }
