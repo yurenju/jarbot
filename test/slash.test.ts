@@ -2,26 +2,20 @@ import listen from 'test-listen';
 import micro from 'micro';
 
 import Slash from './slash';
-import notificationFunc from '../src/notification';
 import slashFunc from '../src/slash';
 
-let notificationService;
 let slashService;
 let slashUrl;
-let notificationUrl;
 let slash;
 
 beforeEach(async () => {
-  notificationService = micro(notificationFunc('SLACK_URL'));
   slashService = micro(slashFunc());
 
   slashUrl = await listen(slashService);
-  notificationUrl = await listen(notificationService);
   slash = Slash(slashUrl);
 });
 
 afterEach(() => {
-  notificationService.close();
   slashService.close();
 });
 
