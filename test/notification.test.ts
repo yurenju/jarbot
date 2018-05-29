@@ -1,25 +1,32 @@
 import listen from 'test-listen';
 import micro from 'micro';
+import sinon from 'sinon';
+import fetch from 'node-fetch';
 
 import notificationFunc from '../src/notification';
-import Slack from '../src/provider/slack';
-import Coinbase from '../src/provider/coinbase';
-
 import mockNotification from './mockNotification';
-
-jest.mock('../src/provider/slack');
-jest.mock('../src/provider/coinbase');
+import { Transaction } from '../src/provider/wallet';
 
 let notificationService;
 let notificationUrl;
+let chat;
+let wallet;
+let tx: Transaction;
 
 beforeEach(async () => {
-  Slack.mockClear();
-  Coinbase.mockClear();
-
-  const slack = new Slack('');
-  const coinbase = new Coinbase();
-  notificationService = micro(notificationFunc(slack, coinbase));
+  tx = {
+    slackName: 'testUser',
+    currency: 'BTC',
+    amount: '0.1'
+  };
+  chat = {
+    sendNotification: sinon.stub()
+  };
+  wallet = {
+    getTransaction: sinon.stub(),
+    getWalletAddresses: sinon.stub().returns(tx)
+  };
+  notificationService = micro(notificationFunc(chat, wallet));
   notificationUrl = await listen(notificationService);
 });
 
@@ -36,8 +43,13 @@ describe('notification', () => {
       headers: { 'Content-Type': 'application/json' }
     };
     await fetch(notificationUrl, options);
-    const mockSendNotification = Slack.mock.instances[0];
-    expect(mockSendNotification.mock.calls[0][0]);
-    // have to have a mock getTransaction API to mock result
+    expect(chat.sendNotification.calledOnce).toBeTruthy();
+    expect(
+      chat.sendNotification.firstCall.calledWith(
+        tx.slackName,
+        tx.currency,
+        tx.amount
+      )
+    ).toBeTruthy();
   });
 });
