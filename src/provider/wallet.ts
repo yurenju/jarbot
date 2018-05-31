@@ -1,6 +1,7 @@
 export interface WalletAddresses {
   btc: string;
   eth: string;
+  [key: string]: string;
 }
 
 export interface Transaction {
@@ -12,6 +13,7 @@ export interface Transaction {
 export interface Balances {
   btc: string;
   eth: string;
+  [key: string]: string;
 }
 
 export interface WalletProvider {
