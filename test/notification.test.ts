@@ -20,10 +20,10 @@ beforeEach(async () => {
     amount: '0.1'
   };
   chat = {
-    sendNotification: sinon.stub()
+    sendNotification: sinon.stub().resolves({})
   };
   wallet = {
-    getTransaction: sinon.stub(),
+    getTransaction: sinon.stub().returns(tx),
     getWalletAddresses: sinon.stub().returns(tx)
   };
   notificationService = micro(notificationFunc(chat, wallet));
