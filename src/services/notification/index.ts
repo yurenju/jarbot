@@ -1,8 +1,8 @@
 import { json } from 'micro';
 import { IncomingMessage } from 'http';
 
-import { WalletProvider } from '../src/providers/wallet';
-import { ChatProvider } from '../src/providers/chat';
+import { WalletProvider } from '../../providers/wallet';
+import { ChatProvider } from '../../providers/chat';
 
 export default (chat: ChatProvider, wallet: WalletProvider) => {
   return async (req: IncomingMessage) => {

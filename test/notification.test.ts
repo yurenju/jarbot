@@ -3,7 +3,7 @@ import micro from 'micro';
 import sinon from 'sinon';
 import fetch from 'node-fetch';
 
-import notificationFunc from '../src/notification';
+import notificationFunc from '../src/services/notification';
 import mockNotification from './mockNotification';
 import { Transaction } from '../src/providers/wallet';
 

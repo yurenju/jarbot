@@ -1,6 +1,6 @@
 import micro from 'micro';
-import slash from './slash';
-import notification from './notification';
+import slash from './services/slash';
+import notification from './services/notification';
 import Coinbase from './providers/coinbase';
 import { Slack } from './providers/slack';
 

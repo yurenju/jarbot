@@ -1,8 +1,8 @@
 import formidable from 'formidable';
 import { IncomingMessage } from 'http';
 
-import { WalletProvider } from './providers/wallet';
-import { ChatProvider } from './providers/chat';
+import { WalletProvider } from '../../providers/wallet';
+import { ChatProvider } from '../../providers/chat';
 
 enum Command {
   Jar = 'jar',
