@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 import notificationFunc from '../src/notification';
 import mockNotification from './mockNotification';
-import { Transaction } from '../src/provider/wallet';
+import { Transaction } from '../src/providers/wallet';
 
 let notificationService;
 let notificationUrl;

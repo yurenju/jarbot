@@ -1,8 +1,8 @@
 import micro from 'micro';
 import slash from './slash';
 import notification from './notification';
-import Coinbase from './provider/coinbase';
-import { Slack } from './provider/slack';
+import Coinbase from './providers/coinbase';
+import { Slack } from './providers/slack';
 
 const coinbase = new Coinbase();
 const slack = new Slack('');

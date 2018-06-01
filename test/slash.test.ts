@@ -1,11 +1,11 @@
 import listen from 'test-listen';
 import micro from 'micro';
+import sinon from 'sinon';
 
 import Slash from './slash';
 import slashFunc from '../src/slash';
-import { WalletProvider } from '../src/provider/wallet';
-import sinon from 'sinon';
-import { ChatProvider } from '../src/provider/chat';
+import { WalletProvider } from '../src/providers/wallet';
+import { ChatProvider } from '../src/providers/chat';
 
 let slashService;
 let slashUrl;
