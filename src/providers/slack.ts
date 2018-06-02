@@ -1,5 +1,8 @@
-import { ChatProvider } from './chat';
 import fetch from 'node-fetch';
+import { IncomingMessage } from 'http';
+import formidable from 'formidable';
+
+import { ChatProvider } from './chat';
 import { WalletAddresses, Balances } from './wallet';
 
 function formatToSlackMessage(obj: any): object {
@@ -12,11 +15,34 @@ function formatToSlackMessage(obj: any): object {
   return { attachments: [{ fields }] };
 }
 
+interface Multipart {
+  fields: any;
+}
+
+function form(req: IncomingMessage): Promise<Multipart> {
+  return new Promise(function(resolve, reject) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields) {
+      if (err) return reject(err);
+      resolve({ fields: fields });
+    });
+  });
+}
+
 export class Slack implements ChatProvider {
   webhookUrl: string;
 
   constructor(url: string) {
     this.webhookUrl = url;
+  }
+
+  async parseCommandRequest(req: IncomingMessage) {
+    const { fields } = await form(req);
+    const cmd = fields.text.substr(1);
+    return {
+      name: cmd,
+      username: fields.user_name
+    };
   }
 
   formatBalances(balances: Balances): object {

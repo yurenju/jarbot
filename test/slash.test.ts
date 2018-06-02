@@ -29,6 +29,7 @@ beforeEach(async () => {
   };
   chat = {
     sendNotification: sinon.stub(),
+    parseCommandRequest: sinon.stub().resolves({ name: 'balance' }),
     formatBalances: sinon.stub().returns({
       attachments: [
         {

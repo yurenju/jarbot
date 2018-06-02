@@ -2,37 +2,16 @@ import formidable from 'formidable';
 import { IncomingMessage } from 'http';
 
 import { WalletProvider } from '../../providers/wallet';
-import { ChatProvider } from '../../providers/chat';
-
-enum Command {
-  Jar = 'jar',
-  Balance = 'balance'
-}
-
-interface Multipart {
-  fields: any;
-}
-
-function form(req: IncomingMessage): Promise<Multipart> {
-  return new Promise(function(resolve, reject) {
-    var form = new formidable.IncomingForm();
-    form.parse(req, function(err, fields) {
-      if (err) return reject(err);
-      resolve({ fields: fields });
-    });
-  });
-}
+import { ChatProvider, CommandType } from '../../providers/chat';
 
 export default (chat: ChatProvider, wallet: WalletProvider) => {
   return async (req: IncomingMessage, res: any) => {
     let msg: object;
-    const { fields } = await form(req);
-    const cmd = fields.text.substr(1);
-    const username = fields.user_name;
+    const cmd = await chat.parseCommandRequest(req);
 
-    if (cmd === Command.Jar) {
-      msg = chat.formatAddresses(await wallet.getWalletAddresses(username));
-    } else {
+    if (cmd.name === CommandType.jar) {
+      msg = chat.formatAddresses(await wallet.getWalletAddresses(cmd.username));
+    } else if (cmd.name === CommandType.balance) {
       msg = chat.formatBalances(await wallet.getBalances());
     }
 

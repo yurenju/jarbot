@@ -1,4 +1,15 @@
 import { WalletAddresses, Balances } from './wallet';
+import { IncomingMessage } from 'http';
+
+export enum CommandType {
+  jar = 'jar',
+  balance = 'balance'
+}
+
+interface Command {
+  name: CommandType;
+  username: string;
+}
 
 export interface ChatProvider {
   sendNotification(
@@ -7,6 +18,7 @@ export interface ChatProvider {
     amount: string
   ): Promise<object>;
 
+  parseCommandRequest(req: IncomingMessage): Promise<Command>;
   formatAddresses(addrs: WalletAddresses): object;
   formatBalances(balances: Balances): object;
 }
