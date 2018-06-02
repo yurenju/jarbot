@@ -55,7 +55,7 @@ export class Slack implements ChatProvider {
 
   async sendNotification(user: string, currency: string, amount: string) {
     const body = {
-      text: `${user}, ${currency}, ${amount}`
+      text: `🎉 ${user} sent ${amount} ${currency} to jar!!`
     };
     const options = {
       method: 'POST',
