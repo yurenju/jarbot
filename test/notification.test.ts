@@ -39,7 +39,19 @@ afterEach(() => {
 });
 
 describe('notification', () => {
-  it('accepts ping notification');
+  it('accepts ping notification', async () => {
+    const notification = JSON.parse(JSON.stringify(mockNotification));
+    notification.type = 'ping';
+    delete notification.data;
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(notification),
+      headers: { 'Content-Type': 'application/json' }
+    };
+    await fetch(notificationUrl, options);
+    expect(chat.sendNotification.notCalled).toBeTruthy();
+  });
   it('sends message to slack when receive a notification', async () => {
     const notification = JSON.parse(JSON.stringify(mockNotification));
     const options = {
