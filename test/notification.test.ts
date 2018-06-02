@@ -14,8 +14,12 @@ let wallet;
 let tx: Transaction;
 
 beforeEach(async () => {
+  const addresses = {
+    btc: 'btc_addr',
+    eth: 'eth_addr'
+  };
   tx = {
-    slackName: 'testUser',
+    username: 'testUser',
     currency: 'BTC',
     amount: '0.1'
   };
@@ -24,7 +28,7 @@ beforeEach(async () => {
   };
   wallet = {
     getTransaction: sinon.stub().returns(tx),
-    getWalletAddresses: sinon.stub().returns(tx)
+    getWalletAddresses: sinon.stub().returns(addresses)
   };
   notificationService = micro(notificationFunc(chat, wallet));
   notificationUrl = await listen(notificationService);
@@ -35,6 +39,7 @@ afterEach(() => {
 });
 
 describe('notification', () => {
+  it('accepts ping notification');
   it('sends message to slack when receive a notification', async () => {
     const notification = JSON.parse(JSON.stringify(mockNotification));
     const options = {
@@ -46,7 +51,7 @@ describe('notification', () => {
     expect(chat.sendNotification.calledOnce).toBeTruthy();
     expect(
       chat.sendNotification.firstCall.calledWith(
-        tx.slackName,
+        tx.username,
         tx.currency,
         tx.amount
       )

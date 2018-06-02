@@ -1,11 +1,22 @@
+export interface ApiCredential {
+  apiKey: string;
+  apiSecret: string;
+}
+
+export interface AddressInfo {
+  address: string;
+  id?: string;
+  accountId?: string;
+}
+
 export interface WalletAddresses {
-  btc: string;
-  eth: string;
-  [key: string]: string;
+  btc?: AddressInfo;
+  eth?: AddressInfo;
+  [key: string]: AddressInfo;
 }
 
 export interface Transaction {
-  slackName: string;
+  username: string;
   currency: string;
   amount: string;
 }
@@ -17,7 +28,7 @@ export interface Balances {
 }
 
 export interface WalletProvider {
-  getWalletAddresses(): WalletAddresses;
-  getTransaction(notification: object): Transaction;
+  getWalletAddresses(username: string): Promise<WalletAddresses>;
+  getTransaction(notification: object): Promise<Transaction>;
   getBalances(): Balances;
 }

@@ -28,9 +28,10 @@ export default (chat: ChatProvider, wallet: WalletProvider) => {
     let msg: object;
     const { fields } = await form(req);
     const cmd = fields.text.substr(1);
+    const username = fields.user_name;
 
     if (cmd === Command.Jar) {
-      msg = chat.formatAddresses(wallet.getWalletAddresses());
+      msg = chat.formatAddresses(await wallet.getWalletAddresses(username));
     } else {
       msg = chat.formatBalances(wallet.getBalances());
     }
