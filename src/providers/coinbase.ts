@@ -9,7 +9,7 @@ import {
 } from './wallet';
 import { Client, Account, Address } from 'coinbase';
 
-export default class Coinbase implements WalletProvider {
+export class Coinbase implements WalletProvider {
   client: Client;
   getAccounts: Function;
 

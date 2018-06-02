@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
 
-import Coinbase from '../src/providers/coinbase';
+import { Coinbase } from '../src/providers/coinbase';
 import { ApiCredential } from '../src/providers/wallet';
 
 import mockNotification from './mockNotification';
