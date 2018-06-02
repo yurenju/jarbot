@@ -30,5 +30,5 @@ export interface Balances {
 export interface WalletProvider {
   getWalletAddresses(username: string): Promise<WalletAddresses>;
   getTransaction(notification: object): Promise<Transaction>;
-  getBalances(): Balances;
+  getBalances(): Promise<Balances>;
 }

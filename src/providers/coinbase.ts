@@ -11,14 +11,15 @@ import { Client, Account, Address } from 'coinbase';
 
 export default class Coinbase implements WalletProvider {
   client: Client;
+  getAccounts: Function;
 
   constructor(opts: ApiCredential) {
     this.client = new Client(opts);
+    this.getAccounts = promisify(this.client.getAccounts.bind(this.client));
   }
 
   async getWalletAddresses(username: string): Promise<WalletAddresses> {
-    const getAccounts = promisify(this.client.getAccounts.bind(this.client));
-    const accounts = await getAccounts({});
+    const accounts = await this.getAccounts({});
     const promises = accounts.map((a: Account) => {
       const createAddress = promisify(a.createAddress.bind(a));
       return createAddress({ name: username });
@@ -55,7 +56,13 @@ export default class Coinbase implements WalletProvider {
 
     return tx;
   }
-  getBalances(): Balances {
-    throw new Error('Method not implemented.');
+  async getBalances(): Promise<Balances> {
+    const balances: any = {};
+    const accounts = await this.getAccounts({});
+    accounts.forEach((account: any) => {
+      balances[account.currency] = account.balance.amount;
+    });
+
+    return balances;
   }
 }

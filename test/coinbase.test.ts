@@ -28,4 +28,11 @@ describe('coinbase', () => {
     const tx = await coinbase.getTransaction(notification);
     expect(tx.username).toEqual('test-user');
   });
+
+  it('gets balances via getBalances() API', async () => {
+    const coinbase = new Coinbase(opts);
+    const balances = await coinbase.getBalances();
+    expect(balances.ETH).toBeDefined();
+    expect(balances.BTC).toBeDefined();
+  });
 });
