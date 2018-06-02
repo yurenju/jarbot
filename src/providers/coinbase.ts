@@ -28,9 +28,9 @@ export default class Coinbase implements WalletProvider {
     addresses.forEach((addr: any, i) => {
       let key;
       if (addr.network === 'ethereum') {
-        key = 'eth';
+        key = 'ETH';
       } else if (addr.network === 'bitcoin') {
-        key = 'btc';
+        key = 'BTC';
       }
       result[key] = {
         address: addr.address,

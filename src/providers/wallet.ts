@@ -10,8 +10,8 @@ export interface AddressInfo {
 }
 
 export interface WalletAddresses {
-  btc?: AddressInfo;
-  eth?: AddressInfo;
+  BTC?: AddressInfo;
+  ETH?: AddressInfo;
   [key: string]: AddressInfo;
 }
 
@@ -22,8 +22,8 @@ export interface Transaction {
 }
 
 export interface Balances {
-  btc: string;
-  eth: string;
+  BTC: string;
+  ETH: string;
   [key: string]: string;
 }
 

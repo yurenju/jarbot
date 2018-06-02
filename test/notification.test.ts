@@ -15,8 +15,8 @@ let tx: Transaction;
 
 beforeEach(async () => {
   const addresses = {
-    btc: 'btc_addr',
-    eth: 'eth_addr'
+    BTC: 'btc_addr',
+    ETH: 'eth_addr'
   };
   tx = {
     username: 'testUser',

@@ -15,12 +15,12 @@ let chat: ChatProvider;
 
 beforeEach(async () => {
   const addresses = {
-    btc: 'btc_addr',
-    eth: 'eth_addr'
+    BTC: 'btc_addr',
+    ETH: 'eth_addr'
   };
   const balances = {
-    btc: '0.5',
-    eth: '0.1'
+    BTC: '0.5',
+    ETH: '0.1'
   };
   wallet = {
     getTransaction: sinon.stub(),

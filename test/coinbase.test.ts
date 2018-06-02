@@ -15,16 +15,16 @@ describe('coinbase', () => {
   it('gets addresses from coinbase', async () => {
     const coinbase = new Coinbase(opts);
     const addrs = await coinbase.getWalletAddresses('test-user');
-    expect(addrs.btc.address).toBeTruthy;
-    expect(addrs.eth.address).toBeTruthy;
+    expect(addrs.BTC.address).toBeTruthy;
+    expect(addrs.ETH.address).toBeTruthy;
   });
 
   it('gets transaction info from notification object', async () => {
     const notification = JSON.parse(JSON.stringify(mockNotification));
     const coinbase = new Coinbase(opts);
     const addrs = await coinbase.getWalletAddresses('test-user');
-    notification.data.id = addrs.eth.id;
-    notification.account.id = addrs.eth.accountId;
+    notification.data.id = addrs.ETH.id;
+    notification.account.id = addrs.ETH.accountId;
     const tx = await coinbase.getTransaction(notification);
     expect(tx.username).toEqual('test-user');
   });
