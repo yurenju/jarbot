@@ -5,7 +5,7 @@ import { WalletAddresses, Balances } from './wallet';
 function formatToSlackMessage(obj: any): object {
   const fields = Object.keys(obj).map(key => {
     return {
-      title: key.toUpperCase(),
+      title: key,
       value: obj[key]
     };
   });
@@ -13,10 +13,10 @@ function formatToSlackMessage(obj: any): object {
 }
 
 export class Slack implements ChatProvider {
-  url: string;
+  webhookUrl: string;
 
   constructor(url: string) {
-    this.url = url;
+    this.webhookUrl = url;
   }
 
   formatBalances(balances: Balances): object {
@@ -27,7 +27,7 @@ export class Slack implements ChatProvider {
     return formatToSlackMessage(addrs);
   }
 
-  sendNotification(user: string, currency: string, amount: string) {
+  async sendNotification(user: string, currency: string, amount: string) {
     const body = {
       text: `${user}, ${currency}, ${amount}`
     };
@@ -37,6 +37,9 @@ export class Slack implements ChatProvider {
       headers: { 'Content-Type': 'application/json' }
     };
 
-    return fetch(this.url, options).then(res => res.json);
+    const result = await fetch(this.webhookUrl, options).then(res =>
+      res.text()
+    );
+    return { ok: result === 'ok' };
   }
 }
