@@ -47,7 +47,6 @@ export default class Coinbase implements WalletProvider {
     const getAddress = promisify(account.getAddress.bind(account));
     const addrId = notification.data.id;
     const addr = await getAddress(addrId);
-    console.log('got address\n\n\n\n');
     const tx: Transaction = {
       username: addr.name,
       currency: notification.additional_data.currency,
