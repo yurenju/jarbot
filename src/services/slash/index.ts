@@ -33,7 +33,7 @@ export default (chat: ChatProvider, wallet: WalletProvider) => {
     if (cmd === Command.Jar) {
       msg = chat.formatAddresses(await wallet.getWalletAddresses(username));
     } else {
-      msg = chat.formatBalances(wallet.getBalances());
+      msg = chat.formatBalances(await wallet.getBalances());
     }
 
     return msg;
