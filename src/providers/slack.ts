@@ -5,16 +5,6 @@ import formidable from 'formidable';
 import { ChatProvider } from './chat';
 import { WalletAddresses, Balances } from './wallet';
 
-function formatToSlackMessage(obj: any): object {
-  const fields = Object.keys(obj).map(key => {
-    return {
-      title: key,
-      value: obj[key]
-    };
-  });
-  return { attachments: [{ fields }] };
-}
-
 interface Multipart {
   fields: any;
 }
@@ -46,11 +36,23 @@ export class Slack implements ChatProvider {
   }
 
   formatBalances(balances: Balances): object {
-    return formatToSlackMessage(balances);
+    const fields = Object.keys(balances).map(key => {
+      return {
+        title: key,
+        value: balances[key]
+      };
+    });
+    return { attachments: [{ fields }] };
   }
 
   formatAddresses(addrs: WalletAddresses): object {
-    return formatToSlackMessage(addrs);
+    const fields = Object.keys(addrs).map(key => {
+      return {
+        title: key,
+        value: addrs[key].address
+      };
+    });
+    return { attachments: [{ fields }] };
   }
 
   async sendNotification(user: string, currency: string, amount: string) {

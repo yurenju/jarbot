@@ -49,8 +49,8 @@ export class Coinbase implements WalletProvider {
     const addr = await getAddress(addrId);
     const tx: Transaction = {
       username: addr.name,
-      currency: notification.additional_data.currency,
-      amount: notification.additional_data.amount
+      currency: notification.additional_data.amount.currency,
+      amount: notification.additional_data.amount.amount
     };
 
     return tx;
