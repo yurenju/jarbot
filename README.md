@@ -11,22 +11,25 @@ it only supports coinbase as wallet provider and slack as chat provider, feel fr
 
 ### Prerequisites
 
-* Slack incoming webhook url
+* Slack incoming webhook URL
 * Coinbase API key/secret
 
 #### Slack incoming webhook
 
-incoming webhook for sending message is necessary, go to https://api.slack.com/apps and click `Create New App` and select your slack room as Development Slack Workspace, then click `Create app`.
+incoming webhook for sending messages is necessary, go to https://api.slack.com/apps and click `Create New App` and select your slack room as Development Slack Workspace, then click `Create app`.
 
-Click `Incoming Webhooks` and activate Incoming Webhooks, click `Add New Webhook to Workspace` to get a webhook url, we will use it later.
+Click `Incoming Webhooks` and activate Incoming Webhooks, click `Add New Webhook to Workspace` to get a webhook URL, we will use it later.
 
 #### Coinbase API key
 
-we need coinbase api to create one time address to receive ETH/BTC. register a coinbase account and go to `Settings` -> `API Access` -> `+ New API Key`.
+We need coinbase api to create a one-time address to receive ETH/BTC. Follow below steps:
 
-Select two accounts: `BTC Wallet` and `ETH Wallet` and then select `wallet:accounts:read`, `wallet:addresses:create` & `wallet:addresses:read`, these 3 permissions can only get your account information & create one-time address for receiving token, should be pretty safe.
+1. register a coinbase account
+2. go to `Settings` -> `API Access` -> `+ New API Key`
+3. Select two accounts: `BTC Wallet` and `ETH Wallet`
+4. Select `wallet:accounts:read`, `wallet:addresses:create` & `wallet:addresses:read` permissions, these 3 permissions can only get your account information & create one-time address for receiving token, should be pretty safe.
 
-please leave `Notification URL` empty, we will update it later. create API key and get API key and secret, will use use it later.
+Please leave `Notification URL` empty, and we will update it later. Create API key and get API key and secret will use it then.
 
 ### Configuration
 
@@ -58,7 +61,7 @@ then you will get `dist/services/notification/` and `dist/services/slash/` ready
 
 ### Deploy
 
-first login now.sh service:
+first, login to now.sh service:
 
 ```shell
 $ now login
@@ -71,13 +74,13 @@ $ now --public dist/services/slash
 $ now --public dist/services/notification
 ```
 
-each deployment will get a microservice url. go back to `slack app page` -> `Slash Commands` and create two command: `/jar` & `/balance` with slash microservice url.
+each deployment will get a microservice URL. go back to `slack app page` -> `Slash Commands` and create two command: `/jar` & `/balance` with slash microservice URL.
 
-and also go to `Coinbase API Access` and edit api key to update `Notification URL` to notification microservice url.
+and also go to `Coinbase API Access` and edit api key to update `Notification URL` to notification microservice URL.
 
 ### Usage
 
-go to slack and use `/jar` to create a unique address both for BTC & ETH. e.g., user `bob` use `/jar` will generate two addresses which will be labeled `bob`. so when receive payments via these addresses, a notification will show `receive payment from bob`.
+go to slack and use `/jar` to create a unique address both for BTC & ETH. e.g., user `bob` use `/jar` will generate two addresses which will be labeled `bob`. so when receiving payments via these addresses, a notification will show `receive payment from bob`.
 
 ![jarbot features](/assets/features.png)
 
