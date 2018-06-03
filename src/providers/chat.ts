@@ -6,7 +6,7 @@ export enum CommandType {
   balance = 'balance'
 }
 
-interface Command {
+export interface Command {
   name: CommandType;
   username: string;
 }

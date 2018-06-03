@@ -1,20 +1,16 @@
-import formidable from 'formidable';
 import { IncomingMessage } from 'http';
 
-import { WalletProvider } from '../../providers/wallet';
-import { ChatProvider, CommandType } from '../../providers/chat';
+import Slash from './slash';
+import { Slack } from 'jarbot-providers/slack';
+import { Coinbase } from 'jarbot-providers/coinbase';
+import { ApiCredential } from 'jarbot-providers/wallet';
 
-export default (chat: ChatProvider, wallet: WalletProvider) => {
-  return async (req: IncomingMessage, res: any) => {
-    let msg: object;
-    const cmd = await chat.parseCommandRequest(req);
-
-    if (cmd.name === CommandType.jar) {
-      msg = chat.formatAddresses(await wallet.getWalletAddresses(cmd.username));
-    } else if (cmd.name === CommandType.balance) {
-      msg = chat.formatBalances(await wallet.getBalances());
-    }
-
-    return msg;
-  };
+const cred: ApiCredential = {
+  apiKey: process.env.COINBASE_API_KEY,
+  apiSecret: process.env.COINBASE_API_SECRET
 };
+
+const slack = new Slack(process.env.SLACK_WEBHOOK_URL);
+const coinbase = new Coinbase(cred);
+
+export default Slash(slack, coinbase);

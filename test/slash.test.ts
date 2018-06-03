@@ -3,7 +3,7 @@ import micro from 'micro';
 import sinon from 'sinon';
 
 import Slash from './slash';
-import slashFunc from '../src/services/slash';
+import slashFunc from '../src/services/slash/slash';
 import { WalletProvider } from '../src/providers/wallet';
 import { ChatProvider } from '../src/providers/chat';
 

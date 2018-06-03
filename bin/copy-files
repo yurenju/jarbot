@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const shell = require('shelljs');
+
+const root = path.join(__dirname, '..');
+shell
+  .find(`${root}/src`)
+  .map(file => file.replace(root + '/src/', ''))
+  .filter(file => file.match(/(package.json|now.json)/))
+  .forEach(file => {
+    shell.cp(`src/${file}`, `dist/${file}`);
+  });

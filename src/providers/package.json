@@ -1,0 +1,16 @@
+{
+  "name": "jarbot-providers",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yuren Ju <yurenju@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "coinbase": "^2.0.8",
+    "formidable": "^1.2.1",
+    "node-fetch": "^2.1.2"
+  }
+}

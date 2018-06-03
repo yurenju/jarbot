@@ -38,7 +38,7 @@ export class Slack implements ChatProvider {
 
   async parseCommandRequest(req: IncomingMessage) {
     const { fields } = await form(req);
-    const cmd = fields.text.substr(1);
+    const cmd = fields.command.substr(1);
     return {
       name: cmd,
       username: fields.user_name

@@ -1,0 +1,15 @@
+{
+  "name": "jarbot-slash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro"
+  },
+  "author": "Yuren Ju <yurenju@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "micro": "^9.3.2",
+    "jarbot-providers": "^0.0.1"
+  }
+}
