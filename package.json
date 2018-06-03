@@ -38,6 +38,7 @@
     "coinbase": "^2.0.8",
     "form-data": "^2.3.2",
     "formidable": "^1.2.1",
+    "jarbot-provider": "0.0.1",
     "micro": "^9.3.1",
     "node-fetch": "^2.1.2"
   }

@@ -1,8 +1,8 @@
 import formidable from 'formidable';
 import { IncomingMessage } from 'http';
 
-import { WalletProvider } from 'jarbot-providers/wallet';
-import { ChatProvider, CommandType } from 'jarbot-providers/chat';
+import { WalletProvider } from 'jarbot-provider/wallet';
+import { ChatProvider, CommandType } from 'jarbot-provider/chat';
 
 export default (chat: ChatProvider, wallet: WalletProvider) => {
   return async (req: IncomingMessage) => {

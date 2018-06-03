@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "micro": "^9.3.2",
-    "jarbot-providers": "^0.0.1"
+    "jarbot-provider": "^0.0.1"
   }
 }
