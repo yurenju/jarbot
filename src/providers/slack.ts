@@ -42,7 +42,7 @@ export class Slack implements ChatProvider {
         value: balances[key]
       };
     });
-    return { attachments: [{ fields }] };
+    return { response_type: 'in_channel', attachments: [{ fields }] };
   }
 
   formatAddresses(addrs: WalletAddresses): object {
@@ -52,7 +52,7 @@ export class Slack implements ChatProvider {
         value: addrs[key].address
       };
     });
-    return { attachments: [{ fields }] };
+    return { response_type: 'in_channel', attachments: [{ fields }] };
   }
 
   async sendNotification(user: string, currency: string, amount: string) {
